@@ -43,21 +43,14 @@ function drawBoxes() {
             e.target.style.cssText += "background-color: black;";
         })
     }
-
-    return boxes;
 }
 
-// Add event listener to the reset button to call the buildGrid function again
+// Event listener to reset the grid
 resetGrid.addEventListener("click", () => {
-    // for (let i = 0; i < boxes.length; i++) {
-    //     boxes[i].style.cssText += "background-color: white;";
-    // }
-
-    // sketchContainer.style.css += "border: solid black 5px;";
     let sketchContainer = document.querySelector("#sketchContainer");
     container.removeChild(sketchContainer);
     buildGrid(defaultGridSize);
 })
 
+// Build the initial grid displayed on the website
 buildGrid(defaultGridSize);
-const boxes = drawBoxes();
