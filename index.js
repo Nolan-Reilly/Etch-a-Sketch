@@ -1,27 +1,26 @@
-let sketchContainer = document.querySelector("#sketchContainer");
+const container = document.querySelector("#container");
 const resetGrid = document.querySelector("#resetGrid");
 const body = document.querySelector("#body");
 
-let defaultGridSize = 50;
+// Current default gridSize to be loaded with
+let defaultGridSize = 16;  
 
-let boxDimension = 600 / defaultGridSize;
+// Determines the size of each box in the sketchContainer
+let boxDimension = 600 / defaultGridSize;  
 
-// Build some sort of creation tool that creates some grid of divs here
-// Example is 16x16 grid, 25x25 grid, 40x40 grid
-
-// Left off trying to implement creating the grid from a function instead of being hardcoded in
-// had problems with the right, and bottom border disappearing when resetting. Code
-// below might fix this if we instead don't change each box to the color white, but instead
-// delete the entire grid, and replace it with a whole new grid
+// Builds that grid that will be used to be drawn in
 function buildGrid(gridSize) {
-    
 
-    for (let i = 0; i < defaultGridSize; i++) {
+    // Create the div the will contain the divs for the Etch-a-Sketch
+    let sketchContainer = document.createElement("div");
+    sketchContainer.setAttribute("id", "sketchContainer");
+
+    for (let i = 0; i < gridSize; i++) {
 
         // Create a div here to represent a row, and below append 16 divs
-        const row = document.createElement("div");
+        let row = document.createElement("div");
     
-        for (let j = 0; j < defaultGridSize; j++) {
+        for (let j = 0; j < gridSize; j++) {
             const box = document.createElement("div");
             box.className = "box";
             box.style.cssText = `width: ${boxDimension}px; height: ${boxDimension}px;`
@@ -29,33 +28,26 @@ function buildGrid(gridSize) {
         }
     
         sketchContainer.appendChild(row);
-    }
-}
-
-for (let i = 0; i < defaultGridSize; i++) {
-
-    // Create a div here to represent a row, and below append 16 divs
-    const row = document.createElement("div");
-
-    for (let j = 0; j < defaultGridSize; j++) {
-        const box = document.createElement("div");
-        box.className = "box";
-        box.style.cssText = `width: ${boxDimension}px; height: ${boxDimension}px;`
-        row.appendChild(box);
+        container.appendChild(sketchContainer);
     }
 
-    sketchContainer.appendChild(row);
+    drawBoxes()
 }
 
-const boxes = document.querySelectorAll(".box");
+// Adds event listeners to all boxes to be hovered over and colored black
+function drawBoxes() {
+    let boxes = document.querySelectorAll(".box");
 
-for (let i = 0; i < boxes.length; i++) {
-    boxes[i].addEventListener("mouseover", (e) => {
-        e.target.style.cssText += "background-color: black;";
-    })
+    for (let i = 0; i < boxes.length; i++) {
+        boxes[i].addEventListener("mouseover", (e) => {
+            e.target.style.cssText += "background-color: black;";
+        })
+    }
+
+    return boxes;
 }
 
-// Work on this with the new above function
+// Add event listener to the reset button to call the buildGrid function again
 resetGrid.addEventListener("click", () => {
     for (let i = 0; i < boxes.length; i++) {
         boxes[i].style.cssText += "background-color: white;";
@@ -64,3 +56,5 @@ resetGrid.addEventListener("click", () => {
     sketchContainer.style.css += "border: solid black 5px;";
 })
 
+buildGrid(16);
+const boxes = drawBoxes();
