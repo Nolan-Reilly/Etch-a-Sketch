@@ -49,12 +49,15 @@ function drawBoxes() {
 
 // Add event listener to the reset button to call the buildGrid function again
 resetGrid.addEventListener("click", () => {
-    for (let i = 0; i < boxes.length; i++) {
-        boxes[i].style.cssText += "background-color: white;";
-    }
+    // for (let i = 0; i < boxes.length; i++) {
+    //     boxes[i].style.cssText += "background-color: white;";
+    // }
 
-    sketchContainer.style.css += "border: solid black 5px;";
+    // sketchContainer.style.css += "border: solid black 5px;";
+    let sketchContainer = document.querySelector("#sketchContainer");
+    container.removeChild(sketchContainer);
+    buildGrid(defaultGridSize);
 })
 
-buildGrid(16);
+buildGrid(defaultGridSize);
 const boxes = drawBoxes();
