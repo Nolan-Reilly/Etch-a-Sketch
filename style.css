@@ -8,10 +8,10 @@
     display: flex;
     justify-content: center;
     margin-top: 16px;
-    margin-bottom: 0px;
+    gap: 16px;
 }
 
-#resetGrid {
+button {
     background-color: black;
     color: white;
     padding: 14px 28px;

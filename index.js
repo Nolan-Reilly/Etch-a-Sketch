@@ -1,15 +1,16 @@
 const container = document.querySelector("#container");
 const resetGrid = document.querySelector("#resetGrid");
+const changeGrid = document.querySelector("#changeGridSize");
 const body = document.querySelector("#body");
 
 // Current default gridSize to be loaded with
-let defaultGridSize = 16;  
-
+let gridDimension = 16;
 // Determines the size of each box in the sketchContainer
-let boxDimension = 600 / defaultGridSize;  
+let boxDimension = 600 / gridDimension;  
 
 // Builds that grid that will be used to be drawn in
 function buildGrid(gridSize) {
+    let boxDimension = 600 / gridSize;  
 
     // Create the div the will contain the divs for the Etch-a-Sketch
     let sketchContainer = document.createElement("div");
@@ -49,8 +50,15 @@ function drawBoxes() {
 resetGrid.addEventListener("click", () => {
     let sketchContainer = document.querySelector("#sketchContainer");
     container.removeChild(sketchContainer);
-    buildGrid(defaultGridSize);
+    buildGrid(gridDimension);
+})
+
+changeGrid.addEventListener("click", () => {
+    gridDimension = prompt("Enter a number for the dimensions of the Etch-a-Sketch:");
+    let sketchContainer = document.querySelector("#sketchContainer");
+    container.removeChild(sketchContainer);
+    buildGrid(gridDimension);
 })
 
 // Build the initial grid displayed on the website
-buildGrid(defaultGridSize);
+buildGrid(gridDimension);
